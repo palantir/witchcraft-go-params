@@ -1,5 +1,7 @@
 witchcraft-go-params
 ====================
+[![](https://godoc.org/github.com/palantir/witchcraft-go-params?status.svg)](http://godoc.org/github.com/palantir/witchcraft-go-params)
+
 `witchcraft-go-params` defines the `wparams` package, which provides the `ParamStorer` interface and functions for 
 storing and retrieving `ParamStorer` implementations in from a context.
 

@@ -8,12 +8,6 @@
   version = "v1.1.1"
 
 [[projects]]
-  name = "github.com/palantir/witchcraft-go-params"
-  packages = ["."]
-  revision = "d5c8ded2ab5588d1a81f306247162cb54d2504d7"
-  version = "1.0.0"
-
-[[projects]]
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
@@ -28,6 +22,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "2af805a60e9b3627f0b259bb5814424d38b37bdaad50927ae2e85d80c9ec1d4a"
+  inputs-digest = "a3f0936778bf7527e2d281c9627a81eef5b758c989349ae8b3e3d62e2a720880"
   solver-name = "gps-cdcl"
   solver-version = 1

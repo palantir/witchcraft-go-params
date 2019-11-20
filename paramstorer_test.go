@@ -3,7 +3,7 @@ package wparams_test
 import (
 	"testing"
 
-	"github.com/palantir/witchcraft-go-params"
+	wparams "github.com/palantir/witchcraft-go-params"
 	"github.com/stretchr/testify/assert"
 )
 

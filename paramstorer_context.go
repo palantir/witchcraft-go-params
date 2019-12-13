@@ -54,14 +54,14 @@ func ContextWithSafeAndUnsafeParams(ctx context.Context, safeParams, unsafeParam
 	return ContextWithParamStorers(ctx, NewSafeAndUnsafeParamStorer(safeParams, unsafeParams))
 }
 
-// ParamStorerFromContext returns the ParamStorer stored in the provided context. Returns nil if the provided context
-// does not contain a ParamStorer.
+// ParamStorerFromContext returns the ParamStorer stored in the provided context. Returns an empty ParamStorer if the
+// provided context does not contain one.
 func ParamStorerFromContext(ctx context.Context) ParamStorer {
 	val := ctx.Value(wParamsContextKey)
 	if paramStorer, ok := val.(ParamStorer); ok {
 		return paramStorer
 	}
-	return nil
+	return NewParamStorer()
 }
 
 // SafeAndUnsafeParamsFromContext returns the safe and unsafe parameters stored in the ParamStorer returned by

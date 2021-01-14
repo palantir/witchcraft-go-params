@@ -29,7 +29,7 @@ func NewSafeParamStorer(safeParams map[string]interface{}) ParamStorer {
 	return NewSafeAndUnsafeParamStorer(safeParams, nil)
 }
 
-// NewSafeParam returns a new ParamStorer that stores a single unsafe parameter.
+// NewSafeParam returns a new ParamStorer that stores a single safe parameter.
 func NewSafeParam(key string, value interface{}) ParamStorer {
 	return singleParamStorer{key: key, value: value, safe: true}
 }

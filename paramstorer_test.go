@@ -42,3 +42,31 @@ func TestNewSafeAndUnsafeParamStorer(t *testing.T) {
 	assert.Equal(t, safeVals, paramStorer.SafeParams())
 	assert.Equal(t, unsafeVals, paramStorer.UnsafeParams())
 }
+
+func TestParamStorerSideEffects(t *testing.T) {
+	safeVals := map[string]interface{}{"safeKey": "safeValue"}
+	unsafeVals := map[string]interface{}{"unsafeKey": "unsafeValue"}
+	paramStorer := wparams.NewSafeAndUnsafeParamStorer(safeVals, unsafeVals)
+
+	// edit maps and expect no change to params
+	safeVals["safeKey1"] = "safeValue1"
+	delete(unsafeVals, "unsafeKey")
+	assert.NotContains(t, paramStorer.SafeParams(), "safeKey1")
+	assert.Contains(t, paramStorer.UnsafeParams(), "unsafeKey")
+
+	// inherit storer and expect no change to maps
+	newStorer := wparams.NewParamStorer(paramStorer, wparams.NewSafeParam("newParam", "newValue"))
+	assert.NotContains(t, paramStorer.SafeParams(), "newParam")
+	assert.Contains(t, newStorer.SafeParams(), "newParam")
+
+	// overwrite key and ensure it does not affect parents
+	newStorer = wparams.NewParamStorer(newStorer, wparams.NewUnsafeParam("newParam", "unsafeValue"))
+	assert.NotContains(t, newStorer.SafeParams(), "newParam")
+	assert.Contains(t, newStorer.UnsafeParams(), "newParam")
+
+	// overwrite returned map, verify it does overwrite underlying value
+	// this is not desirable, but we do it so we don't allocate a new map on lookups
+	sp := newStorer.SafeParams()
+	sp["foo"] = "bar"
+	assert.Contains(t, newStorer.SafeParams(), "foo")
+}

@@ -25,8 +25,14 @@ func NewParamStorer(paramStorers ...ParamStorer) ParamStorer {
 }
 
 // NewSafeParamStorer returns a new ParamStorer that stores the provided parameters as SafeParams.
-func NewSafeParamStorer(safeParams map[string]interface{}) ParamStorer {
-	return NewSafeAndUnsafeParamStorer(safeParams, nil)
+func NewSafeParamStorer(safeParams ...map[string]interface{}) ParamStorer {
+	storer := &mapParamStorer{}
+	for _, p := range safeParams {
+		for k, v := range p {
+			storer.putSafeParam(k, v)
+		}
+	}
+	return storer
 }
 
 // NewSafeParam returns a new ParamStorer that stores a single safe parameter.
@@ -35,8 +41,14 @@ func NewSafeParam(key string, value interface{}) ParamStorer {
 }
 
 // NewUnsafeParamStorer returns a new ParamStorer that stores the provided parameters as UnsafeParams.
-func NewUnsafeParamStorer(unsafeParams map[string]interface{}) ParamStorer {
-	return NewSafeAndUnsafeParamStorer(nil, unsafeParams)
+func NewUnsafeParamStorer(unsafeParams ...map[string]interface{}) ParamStorer {
+	storer := &mapParamStorer{}
+	for _, p := range unsafeParams {
+		for k, v := range p {
+			storer.putUnsafeParam(k, v)
+		}
+	}
+	return storer
 }
 
 // NewUnsafeParam returns a new ParamStorer that stores a single unsafe parameter.

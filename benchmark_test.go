@@ -22,7 +22,7 @@ func BenchmarkContextWithSafeParams(b *testing.B) {
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		ctx := context.Background()
-		ctx = wparams.ContextWithSafeParams(ctx, map[string]interface{}{
+		ctx = wparams.ContextWithSafeParams(ctx, map[string]any{
 			"val1": 1,
 			"val2": 2,
 			"val3": 3,
@@ -49,12 +49,12 @@ func BenchmarkContextWithSafeAndUnsafeParams(b *testing.B) {
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		ctx := context.Background()
-		ctx = wparams.ContextWithSafeParams(ctx, map[string]interface{}{
+		ctx = wparams.ContextWithSafeParams(ctx, map[string]any{
 			"safe1": 1,
 			"safe2": 2,
 			"safe3": 3,
 		})
-		ctx = wparams.ContextWithUnsafeParams(ctx, map[string]interface{}{
+		ctx = wparams.ContextWithUnsafeParams(ctx, map[string]any{
 			"unsafe1": 1,
 			"unsafe2": 2,
 			"unsafe3": 3,

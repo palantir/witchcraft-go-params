@@ -2,7 +2,7 @@ module github.com/palantir/witchcraft-go-params
 
 go 1.26.0
 
-toolchain go1.27.0
+toolchain go1.26.7
 
 require github.com/stretchr/testify v1.12.1
 

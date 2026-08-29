@@ -1,5 +1,0 @@
-type: improvement
-improvement:
-  description: Reduce memory usage in ParamStorer utilities
-  links:
-  - https://github.com/palantir/witchcraft-go-params/pull/49
